@@ -1,4 +1,4 @@
-﻿#NoEnv
+#NoEnv
 #Persistent
 SetBatchLines -1
 
@@ -9,6 +9,9 @@ hue := 0
 animationActive := true
 isHovered := false
 minimizeHover := false
+
+; --- Версия программы ---
+appVersion := "1.0.0"
 
 ; --- Анимация фона через PNG кадры ---
 framePath := "C:\Users\MIXPC\Downloads\tuning_ahk_lovler\resources\"  ; папка с кадрами PNG
@@ -56,6 +59,10 @@ GuiControl, +c00FFFF, CurrentKey
 Gui, Font, s12 Italic, Arial
 Gui, Add, Text, x30 y250 w380 h30 Center vSignature c8888FF, By Hasanov
 
+; --- Версия программы (снизу слева) ---
+Gui, Font, s11, Arial
+Gui, Add, Text, x10 y370 w200 h20 vVersionLabel cWhite Left, Версия: %appVersion%
+
 ; --- Свернуть / Закрыть меню ---
 Gui, Font, s12 Bold, Arial
 Gui, Add, Progress, x30 y270 w380 h35 vMinimizeBg BackgroundFF0000 Disabled
@@ -101,6 +108,7 @@ SetTimer, AnimateBorder, 50
 SetTimer, CheckHover, 100
 SetTimer, CheckButtonHover, 100
 SetTimer, AnimateBG, 100  ; анимация фона
+SetTimer, CheckForUpdates, -5000  ; проверка обновлений через 5 сек
 
 ; === Анимация фона через кадры PNG ===
 AnimateBG:
@@ -380,6 +388,29 @@ Return
 ; === Свернуть меню ===
 MinimizeMenu:
     WinMinimize, AHK Меню
+Return
+
+; === Проверка обновлений ===
+CheckForUpdates:
+    versionURL := "https://raw.githubusercontent.com/MuStanskiy/Ahk_tuning_script/refs/heads/main/version.txt"   ; <-- тут твой хостинг или GitHub raw
+    scriptURL  := "https://raw.githubusercontent.com/MuStanskiy/Ahk_tuning_script/refs/heads/main/lovler_ahk_byhasanov.ahk"  ; <-- тут новый .ahk
+    localFile  := A_ScriptFullPath
+
+    ; Скачиваем файл с последней версией
+    UrlDownloadToFile, %versionURL%, %A_Temp%\version.txt
+    FileRead, latestVersion, %A_Temp%\version.txt
+    latestVersion := Trim(latestVersion)
+
+    ; Если версия новее
+    if (latestVersion != "" && latestVersion != appVersion) {
+        ShowNotification("Доступна новая версия: " . latestVersion, "Yellow")
+        Sleep, 2000
+        UrlDownloadToFile, %scriptURL%, %localFile%
+        ShowNotification("Скрипт обновлён, перезапуск...", "Green")
+        Sleep, 1500
+        Run, %localFile%
+        ExitApp
+    }
 Return
 
 GuiClose:
