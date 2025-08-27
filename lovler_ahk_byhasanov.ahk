@@ -11,7 +11,7 @@ isHovered := false
 minimizeHover := false
 
 ; --- Версия программы ---
-appVersion := "1.0.0"
+appVersion := "1.0.2"
 
 ; --- Анимация фона через PNG кадры ---
 framePath := "C:\Users\MIXPC\Downloads\tuning_ahk_lovler\resources\"  ; папка с кадрами PNG
