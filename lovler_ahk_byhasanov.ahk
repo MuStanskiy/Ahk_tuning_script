@@ -11,7 +11,7 @@ isHovered := false
 minimizeHover := false
 
 ; --- Версия программы ---
-appVersion := "1.0.3"
+appVersion := "1.0.5"
 
 ; --- Анимация фона через PNG кадры ---
 framePath := "C:\Users\MIXPC\Downloads\tuning_ahk_lovler\resources\"  ; папка с кадрами PNG
@@ -24,7 +24,7 @@ Loop, Files, %framePath%*.png
 Hotkey, %currentHotkey%, Action, On
 
 ; --- GUI ---
-Gui, -Caption +AlwaysOnTop +ToolWindow
+Gui, -Caption 
 Gui, Color, 1a1a1a
 Gui, Font, s13 cWhite, Arial
 
