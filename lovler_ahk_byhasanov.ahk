@@ -11,7 +11,7 @@ isHovered := false
 minimizeHover := false
 
 ; --- Версия программы ---
-appVersion := "1.0.2"
+appVersion := "1.0.3"
 
 ; --- Анимация фона через PNG кадры ---
 framePath := "C:\Users\MIXPC\Downloads\tuning_ahk_lovler\resources\"  ; папка с кадрами PNG
@@ -79,6 +79,7 @@ Gui, Add, Text, x410 y270 w30 h70 BackgroundTrans gDragWindow
 
 ; --- Показать GUI ---
 Gui, Show, w440 h400, AHK Меню
+Gosub, CheckForUpdates   ; сразу проверить обновления
 WinSet, Region, 0-0 w440 h400 R20-20, AHK Меню
 WinSet, Transparent, 240, AHK Меню
 
