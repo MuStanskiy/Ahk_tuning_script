@@ -1,4 +1,4 @@
-#NoEnv
+﻿#NoEnv
 #Persistent
 SetBatchLines -1
 
@@ -11,7 +11,7 @@ isHovered := false
 minimizeHover := false
 
 ; --- Версия программы ---
-appVersion := "1.0.1"
+appVersion := "1.0.0"
 
 ; --- Анимация фона через PNG кадры ---
 framePath := "C:\Users\MIXPC\Downloads\tuning_ahk_lovler\resources\"  ; папка с кадрами PNG
